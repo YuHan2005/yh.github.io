@@ -4,8 +4,8 @@
 avatar: /images/avatar.svg # 网站 Logo / 头像
 background: # 既是博客的背景，又是文章默认头图
     path: /images/background.jpg
-    width: 1280
-    height: 720
+    width: 1920
+    height: 1080
 favicon:
     href: /images/avatar.svg # 网站图标
     type: image/svg+xml # 图标类型 (image/png, image/vnd.microsoft.icon, image/x-icon, image/gif)
@@ -46,7 +46,7 @@ maxTagcloud: 0 # 标签云组件显示的标签数量，0 表示不限制
 
 social:
     GitHub:
-        - https://github.com/YuHan2005
+        - https://github.com/cocla009
         - icon-github
         - rgb(25, 23, 23)
         - rgba(25, 23, 23, .15)
@@ -86,7 +86,7 @@ gitalk:
     active: false
 giscus:
     active: false
-    repo: YuHan2005/yh.github.io
+    repo: cocla009/yh.github.io
     repoID: ''
     category: General
     categoryID: ''
@@ -108,7 +108,7 @@ sidebar: ''
 # 友链配置
 friends:
     - avatar: /images/avatar.png
-      link: https://github.com/YuHan2005
+      link: https://github.com/cocla009
       name: YuHan
 
 # 可复制的代码块
@@ -124,7 +124,7 @@ banner:
         - Stay hungry, stay foolish
     subtitle: '记录生活 · 分享技术 · 留住热爱'
     # 背景图，留空则使用青蓝渐变兜底（放置 /images/background.jpg 后填回路径即可）
-    image:
+    image: /images/background.jpg
 
 # 樱花/花瓣飘落特效
 sakura:

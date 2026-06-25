@@ -29,7 +29,7 @@
 		<% } %>
 		<link
 			rel="shortcut icon"
-			href="<%= theme.favicon.href %>"
+			href="<%- url_for(theme.favicon.href) %>"
 			type="<%= theme.favicon.type %>"
 		/>
 		<%- css("deps/css/APlayer.min") %>
@@ -43,11 +43,11 @@
 
 	<% var isHome = (typeof is_home === 'function') && is_home() && (page.current === 1 || !page.current);
 	   var showBanner = isHome && theme.banner && theme.banner.enable;
-	   var showSakura = isHome && theme.sakura && theme.sakura.enable; %>
+	   var showSakura = theme.sakura && theme.sakura.enable; %>
 	<body class="<% if (showBanner) { %>kira-home<% } %>"<% if (showSakura) { %> data-sakura="true"<% } %>>
 		<div
 			class="kira-background"
-			style="background-image: url('<%= theme.background.path %>')"
+			style="background-image: url('<%- url_for(theme.background.path) %>')"
 		></div>
 		<%- include("components/header") %>
 		<% if (showBanner) { %>

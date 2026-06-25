@@ -8,7 +8,7 @@
                     style="padding-bottom: '<%= theme.background.height / theme.background.width * 100 %>%'"
                 >
                     <img
-                        data-src="<%- page.cover %>"
+                        data-src="<%- url_for(page.cover) %>"
                         data-sizes="auto"
                         alt="<%= page.title %>"
                         class="lazyload kira-post-cover-image"
@@ -21,7 +21,7 @@
                     style="padding-bottom: '<%= theme.background.height / theme.background.width * 100 %>%'"
                 >
                     <img
-                        data-src="<%- theme.background.path %>"
+                        data-src="<%- url_for(theme.background.path) %>"
                         data-sizes="auto"
                         alt="<%= page.title %>"
                         class="lazyload"

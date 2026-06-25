@@ -1,7 +1,7 @@
 <% var banner = theme.banner || {}; %>
 <div
 	class="kira-banner<% if (!banner.image) { %> kira-banner-gradient<% } %>"
-	<% if (banner.image) { %>style="background-image: url('<%= banner.image %>')"<% } %>
+	<% if (banner.image) { %>style="background-image: url('<%- url_for(banner.image) %>')"<% } %>
 >
 	<div class="kira-banner-mask"></div>
 	<div class="kira-banner-inner">

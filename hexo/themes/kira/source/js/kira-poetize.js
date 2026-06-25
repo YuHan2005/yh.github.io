@@ -91,6 +91,52 @@
 		setInterval(spawn, 1100);
 	}
 
+	// ---------- 点击特效（小猫 + 爱心爆裂上浮） ----------
+	function initClickEffect() {
+		if (!document.body.animate) return;
+		var emojis = ['🐱', '🐾', '😺', '💗', '🐈', '✨'];
+
+		document.addEventListener('click', function (e) {
+			// 避免影响输入框/可编辑区域的正常点击
+			var tag = (e.target && e.target.tagName) || '';
+			if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+			var count = 4 + Math.floor(Math.random() * 3);
+			for (var i = 0; i < count; i++) {
+				spawnBurst(e.clientX, e.clientY, emojis);
+			}
+		}, false);
+
+		function spawnBurst(x, y, pool) {
+			var span = document.createElement('span');
+			span.className = 'kira-click-burst';
+			span.textContent = pool[Math.floor(Math.random() * pool.length)];
+
+			var size = 14 + Math.random() * 14;
+			var angle = Math.random() * Math.PI * 2;
+			var dist = 40 + Math.random() * 60;
+			var dx = Math.cos(angle) * dist;
+			var dy = Math.sin(angle) * dist - 50; // 整体偏向上方飘
+			var rotate = (Math.random() - 0.5) * 120;
+			var duration = 700 + Math.random() * 500;
+
+			span.style.left = x + 'px';
+			span.style.top = y + 'px';
+			span.style.fontSize = size + 'px';
+
+			document.body.appendChild(span);
+
+			var anim = span.animate(
+				[
+					{ transform: 'translate(-50%, -50%) scale(0.4) rotate(0deg)', opacity: 1 },
+					{ transform: 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px)) scale(1) rotate(' + rotate + 'deg)', opacity: 0 }
+				],
+				{ duration: duration, easing: 'cubic-bezier(.17,.67,.42,1)' }
+			);
+			anim.onfinish = function () { span.remove(); };
+		}
+	}
+
 	function ready(fn) {
 		if (document.readyState !== 'loading') {
 			fn();
@@ -102,5 +148,6 @@
 	ready(function () {
 		initTyped();
 		initSakura();
+		initClickEffect();
 	});
 })();
