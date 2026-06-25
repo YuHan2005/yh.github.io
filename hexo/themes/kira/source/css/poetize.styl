@@ -1,0 +1,252 @@
+@import 'constants.styl';
+
+// ===== poetize 风格增强样式 =====
+
+// 渐变主题色（青蓝系）
+$grad = linear-gradient(135deg, $color1 0%, $color2 100%);
+
+// ---------- 首页 Banner ----------
+.kira-banner {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+
+	&.kira-banner-gradient {
+		background: linear-gradient(135deg, $color1 0%, $color5 45%, $color2 100%);
+	}
+
+	.kira-banner-mask {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.25);
+		z-index: 1;
+	}
+
+	.kira-banner-inner {
+		position: relative;
+		z-index: 2;
+		text-align: center;
+		color: #fff;
+		padding: 0 20px;
+		animation: kira-fade-in 1.2s ease;
+
+		.kira-banner-title {
+			font-size: 3.4rem;
+			font-weight: 700;
+			margin: 0 0 18px;
+			letter-spacing: 2px;
+			text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+		}
+
+		.kira-banner-typed {
+			font-size: 1.5rem;
+			min-height: 2rem;
+			font-weight: 400;
+			text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+
+			.kira-typed-cursor {
+				animation: kira-blink 0.9s infinite;
+				font-weight: 300;
+			}
+		}
+
+		.kira-banner-subtitle {
+			margin-top: 22px;
+			font-size: 1.05rem;
+			opacity: 0.92;
+			letter-spacing: 1px;
+			text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	.kira-banner-arrow {
+		position: absolute;
+		left: 50%;
+		bottom: 60px;
+		transform: translateX(-50%);
+		z-index: 3;
+		cursor: pointer;
+		animation: kira-bounce 1.8s infinite;
+
+		.kira-chevron {
+			display: block;
+			width: 22px;
+			height: 22px;
+			border-right: 3px solid #fff;
+			border-bottom: 3px solid #fff;
+			transform: rotate(45deg);
+			opacity: 0.9;
+		}
+	}
+
+	.kira-banner-wave {
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+		width: 100%;
+		line-height: 0;
+		z-index: 2;
+
+		svg {
+			width: 100%;
+			height: 90px;
+
+			path {
+				fill: #f3f7fa;
+			}
+		}
+	}
+}
+
+// 首页有 banner 时，让页面可以正常滚动（覆盖 kira 默认的绝对定位锁高）
+body.kira-home {
+	position: relative;
+	height: auto;
+	min-height: 100vh;
+
+	.kira-background {
+		display: none;
+	}
+
+	.kira-body {
+		position: relative;
+		z-index: 2;
+		background: #f3f7fa;
+		min-height: 60vh;
+	}
+}
+
+// ---------- 文章卡片（poetize 风格：圆角 + 悬浮上浮 + 封面缩放） ----------
+.kira-content .kira-main-content .kira-posts {
+	.kira-post {
+		background: #fff;
+		border-radius: 16px;
+		margin-bottom: 22px;
+		padding: 0 !important;
+		overflow: hidden;
+		box-shadow: 0 8px 24px rgba(116, 142, 166, 0.12);
+		transition: transform 0.32s ease, box-shadow 0.32s ease;
+
+		&:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 16px 36px rgba(38, 198, 218, 0.22);
+			background: #fff;
+
+			.kira-post-cover-image,
+			.kira-post-cover img {
+				transform: scale(1.08);
+			}
+		}
+
+		> a {
+			display: block;
+		}
+
+		.kira-post-cover {
+			border-radius: 0;
+			overflow: hidden;
+
+			img {
+				transition: transform 0.6s ease;
+			}
+		}
+
+		.kira-post-meta,
+		article {
+			padding-inline: 22px;
+		}
+
+		.kira-post-meta {
+			padding-top: 16px;
+		}
+
+		article {
+			padding-bottom: 18px;
+			color: #5c6b7a;
+		}
+	}
+
+	// 卡片化后不再需要分隔线
+	.kira-hr {
+		display: none;
+	}
+}
+
+// ---------- 分页按钮渐变化 ----------
+.kira-content .kira-main-content .kira-page-nav {
+	background: transparent !important;
+	gap: 6px;
+	padding: 10px 0;
+
+	.current {
+		background: linear-gradient(135deg, $color1, $color2) !important;
+		box-shadow: 0 4px 14px rgba($color1, 0.5) !important;
+	}
+}
+
+// ---------- 侧边栏头像渐变光环 ----------
+.kira-sidebar .kira-avatar {
+	box-shadow: 0 0 0 4px #fff, 0 0 0 7px rgba($color1, 0.35), 0 10px 28px rgba($color1, 0.25) !important;
+
+	&:hover img {
+		transform: rotate(360deg);
+	}
+}
+
+// ---------- 选中态/链接渐变 ----------
+.kira-sidebar .kira-list-item.true {
+	background: linear-gradient(135deg, $color1, $color2) !important;
+	box-shadow: 0 4px 14px rgba($color1, 0.45) !important;
+}
+
+// ---------- 樱花花瓣 ----------
+.kira-sakura {
+	position: fixed;
+	top: -10vh;
+	z-index: 9999;
+	pointer-events: none;
+	user-select: none;
+	color: rgba($color1, 0.65);
+	font-size: 14px;
+	will-change: transform;
+}
+
+// ---------- 动画 ----------
+@keyframes kira-blink {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0; }
+}
+
+@keyframes kira-bounce {
+	0%, 100% { transform: translateX(-50%) translateY(0); }
+	50% { transform: translateX(-50%) translateY(12px); }
+}
+
+@keyframes kira-fade-in {
+	from { opacity: 0; transform: translateY(24px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+// ---------- 响应式 ----------
+@media (max-width: 1000px) {
+	.kira-banner {
+		background-attachment: scroll;
+
+		.kira-banner-inner .kira-banner-title {
+			font-size: 2.2rem;
+		}
+
+		.kira-banner-inner .kira-banner-typed {
+			font-size: 1.15rem;
+		}
+	}
+}
+

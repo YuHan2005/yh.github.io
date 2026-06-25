@@ -1,0 +1,31 @@
+<% var banner = theme.banner || {}; %>
+<div
+	class="kira-banner<% if (!banner.image) { %> kira-banner-gradient<% } %>"
+	<% if (banner.image) { %>style="background-image: url('<%= banner.image %>')"<% } %>
+>
+	<div class="kira-banner-mask"></div>
+	<div class="kira-banner-inner">
+		<h1 class="kira-banner-title"><%= config.title %></h1>
+		<div class="kira-banner-typed">
+			<span id="kira-typed-text"></span><span class="kira-typed-cursor">|</span>
+		</div>
+		<% if (banner.subtitle) { %>
+			<p class="kira-banner-subtitle"><%= banner.subtitle %></p>
+		<% } %>
+	</div>
+	<div
+		class="kira-banner-arrow"
+		title="向下滚动"
+		onclick="document.querySelector('.kira-content').scrollIntoView({behavior:'smooth'});"
+	>
+		<span class="kira-chevron"></span>
+	</div>
+	<div class="kira-banner-wave">
+		<svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+			<path d="M0,40 C360,100 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,100 L0,100 Z"></path>
+		</svg>
+	</div>
+</div>
+<script id="kira-typed-data" type="application/json">
+	<%- JSON.stringify((banner.titles && banner.titles.length) ? banner.titles : [config.subtitle || '']) %>
+</script>
