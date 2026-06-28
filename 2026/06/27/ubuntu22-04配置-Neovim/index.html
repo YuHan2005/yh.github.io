@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html 
+	lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/yh.github.io/css/layout.css">
+
+		
+		<title> ubuntu22.04配置 Neovim -  YuHan&#39;s Blog</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/yh.github.io/lib/mdui/mdui.min.css">
+
+		
+<script src="/yh.github.io/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/yh.github.io/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/yh.github.io/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/yh.github.io/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/yh.github.io/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/yh.github.io/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="/yh.github.io/images/avatar.svg"
+			type="image/svg+xml"
+		/>
+		
+<link rel="stylesheet" href="/yh.github.io/deps/css/APlayer.min.css">
+
+		
+		
+<script src="/yh.github.io/deps/js/APlayer.min.js"></script>
+<script src="/yh.github.io/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 8.1.2"></head>
+
+	
+	<body class="" data-sakura="true">
+		<div
+			class="kira-background"
+			style="background-image: url('/yh.github.io/images/background.jpg')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/yh.github.io/" title="YuHan&#39;s Blog">
+        <img
+			src="/yh.github.io/images/avatar.svg"
+			alt="YuHan"
+		/>
+    </a>
+</div>
+		
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a href="/yh.github.io/images/avatar.svg" title="YuHan">
+			<img
+				src="/yh.github.io/images/avatar.svg"
+				alt="YuHan"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>2</div>
+		<div><span>标签</span>5</div>
+		<div><span>分类</span>0</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/yh.github.io/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				回到首页
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/yh.github.io/archives/"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/yh.github.io/about/"
+			title="关于本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				关于本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/yh.github.io/friends/"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				我的朋友
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/cocla009"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/yh.github.io/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/yh.github.io/tags/LazyVim/" style="font-size: 10px;">LazyVim</a> <a href="/yh.github.io/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/yh.github.io/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/yh.github.io/tags/%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">配置</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			文章归档
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/yh.github.io/archives/2026/">2026</a><span class="archive-list-count">2</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2026
+		<a href="/yh.github.io/">YuHan</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/yh.github.io/css/kira-image.css">
+
+
+<script src="/yh.github.io/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/yh.github.io/css/kira-code-copy.css">
+
+	
+<script src="/yh.github.io/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div
+			class="kira-post-cover"
+			style="padding-bottom: '65.99702380952381%'"
+		>
+			<img
+				data-src="/yh.github.io/images/background.jpg"
+				data-sizes="auto"
+				alt="ubuntu22.04配置 Neovim"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>ubuntu22.04配置 Neovim</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2026年06月27日</a>
+			<a><i class="kirafont icon-edit-fill"></i>4.4k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 21 分钟</a>
+		</div>
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在阅读配置之前，我希望你能先明确自己是否需要Neovim，在当前vscode配置如此方便且全面的时代，一个好用的终端编辑器是否是你所需要的。我第一次接触到Nvim是我实习的时候，我的leader所用的插件，当时看他仅仅用终端就把这些命令，以及文本的修改整的如此便捷，我觉得太酷了，所以我学neovim的初衷就是为了酷。如果你也想要学会这个，一开始肯定是非常不习惯的，那么我的建议就是强迫自己使用nvim进入日常的编辑与开发，等到水到渠成，你就会觉得这个玩意太好用了</p>
+<h2 id="一、下载安装-Neovim"><a href="#一、下载安装-Neovim" class="headerlink" title="一、下载安装 Neovim"></a>一、下载安装 Neovim</h2><p>下载官方 AppImage，这样下载的版本最新，后续不会出问题。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage</span><br><span class="line"><span class="built_in">chmod</span> +x nvim-linux-x86_64.appimage</span><br><span class="line"><span class="comment">#把系统默认的 nvim 别名指向这个新下载的现代化版本</span></span><br><span class="line"><span class="comment">#将其追加到你的 shell 配置文件中，这里以 ~/.bashrc 为例，如果你用 zsh 请换成 ~/.zshrc）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;alias nvim=&#x27;~/nvim-linux-x86_64.appimage&#x27;&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="comment">#让配置立刻生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、配置目录结构"><a href="#二、配置目录结构" class="headerlink" title="二、配置目录结构"></a>二、配置目录结构</h2><p>Neovim 的配置目录结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">📂 ~/.config/nvim</span><br><span class="line">├── 📄 init.lua          &lt;-- 入口文件</span><br><span class="line">├── 📂 lua</span><br><span class="line">│   ├── 📂 config        &lt;-- 基础设置</span><br><span class="line">│   │   ├── lazy.lua     &lt;-- 插件管理器配置</span><br><span class="line">│   │   ├── options.lua  &lt;-- 也就是 vim.opt 那些设置</span><br><span class="line">│   │   └── keymaps.lua  &lt;-- 快捷键映射</span><br><span class="line">│   └── 📂 plugins       &lt;-- 插件列表（每个文件一个插件）</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-入口文件-init-lua"><a href="#2-1-入口文件-init-lua" class="headerlink" title="2.1 入口文件 init.lua"></a>2.1 入口文件 init.lua</h3><p>为了让 Neovim 去执行其他文件里的配置，需要在 init.lua 中手动引入——如果你不加这三行，Neovim 启动时就只会读取 init.lua 这一个文件，你写在 options.lua、keymaps.lua 里的那些精心设计的行号、快捷键和插件，系统统统都加载不到。</p>
+<blockquote>
+<p><strong>注意</strong>：如果想要使用 LazyVim 懒人配置的话，千万不要再加这个了。因为 LazyVim 核心启动流程中（lazyvim.util 模块）已经内置了自动扫描 lua&#x2F;config&#x2F; 目录的逻辑。如果再加上这个，这些文件会被加载两次，虽然说不一定会出错，但可能会造成逻辑混乱。</p>
+</blockquote>
+<p>我们可以配置 <code>~/.config/nvim/init.lua</code>：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&quot;config.options&quot;</span>)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;config.keymaps&quot;</span>)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;config.lazy&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样还有一个好处就是我们不需要把所有的配置都塞进 init.lua 中，不然就显得太臃肿了。</p>
+<h2 id="三、插件配置方案"><a href="#三、插件配置方案" class="headerlink" title="三、插件配置方案"></a>三、插件配置方案</h2><p>接下来介绍两种配置方案：方案一使用 LazyVim 一键配置，适合快速上手开箱即用；方案二手动逐插件配置，适合深度定制。</p>
+<h3 id="3-1-方案一：LazyVim-一键配置"><a href="#3-1-方案一：LazyVim-一键配置" class="headerlink" title="3.1 方案一：LazyVim 一键配置"></a>3.1 方案一：LazyVim 一键配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/LazyVim/starter ~/.config/nvim</span><br><span class="line">nvim</span><br></pre></td></tr></table></figure>
+<p>等待插件安装完成即可。</p>
+<p>LazyVim 最大的特点是将常用的功能封装成了快捷键（Keymaps），而且这些快捷键基本都以 <code>&lt;leader&gt;</code> 键开头。在 LazyVim 中，默认的 <code>&lt;leader&gt;</code> 键是<strong>空格键（Space）</strong>。</p>
+<p>以下是日常使用中最常用的基础命令，分成几个常用的类别：</p>
+<h4 id="常用快捷键介绍"><a href="#常用快捷键介绍" class="headerlink" title="常用快捷键介绍"></a>常用快捷键介绍</h4><h5 id="1-核心文件与项目管理"><a href="#1-核心文件与项目管理" class="headerlink" title="1. 核心文件与项目管理"></a>1. 核心文件与项目管理</h5><p>这些命令是你每天打开代码时的基础：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;leader&gt;ff  <span class="comment"># (Find Files): 搜索当前工作目录下的文件（Telescope 插件，极其好用）。</span></span><br><span class="line">&lt;leader&gt;fr  <span class="comment"># (Recent Files): 查看你最近打开过的文件。</span></span><br><span class="line">&lt;leader&gt;<span class="built_in">fg</span>  <span class="comment"># (Find Grep): 在所有文件中搜索关键词（代码搜索的神器）。</span></span><br><span class="line">&lt;leader&gt;e   <span class="comment"># (Explorer): 切换文件树（Neo-tree），帮你查看项目结构。</span></span><br><span class="line">&lt;leader&gt;bb  <span class="comment"># 切换最近使用的 Buffer（文件标签页）。</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-窗口与布局"><a href="#2-窗口与布局" class="headerlink" title="2. 窗口与布局"></a>2. 窗口与布局</h5><p>LazyVim 对窗口的操作做了极大的简化，你不需要去记 <code>:split</code> 这种老指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;leader&gt;w   <span class="comment"># (Windows): 这是一个前缀键。</span></span><br><span class="line">&lt;leader&gt;wv  <span class="comment"># 垂直分屏。</span></span><br><span class="line">&lt;leader&gt;ws  <span class="comment"># 水平分屏。</span></span><br><span class="line">&lt;leader&gt;wd  <span class="comment"># 关闭当前分屏窗口。</span></span><br><span class="line">Ctrl + hjkl <span class="comment"># 在不同分屏窗口间快速跳转（无需前缀，直接用方向键）。</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-代码补全与-LSP"><a href="#3-代码补全与-LSP" class="headerlink" title="3. 代码补全与 LSP"></a>3. 代码补全与 LSP</h5><p>如果你写 C++ 或 Python，这些是你的灵魂：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">K           <span class="comment"># (在普通模式下): 查看函数或变量的文档定义（Hover）。</span></span><br><span class="line">&lt;leader&gt;<span class="built_in">cd</span>  <span class="comment"># 查看当前行的诊断信息（查看哪里报错了）。</span></span><br><span class="line">&lt;leader&gt;ca  <span class="comment"># (Code Action): 执行代码操作（比如自动修复、自动生成代码）。</span></span><br><span class="line">&lt;leader&gt;cr  <span class="comment"># 重命名（Rename）当前变量或函数。</span></span><br><span class="line">gd          <span class="comment"># (Go to Definition): 跳转到变量/函数的定义处（超级好用，写代码必用）。</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="4-插件与系统工具"><a href="#4-插件与系统工具" class="headerlink" title="4. 插件与系统工具"></a>4. 插件与系统工具</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;leader&gt;L   <span class="comment"># (Lazy): 打开插件管理面板（就是你刚开始看到的那个界面）。</span></span><br><span class="line">&lt;leader&gt;u   <span class="comment"># (UI): 这是一个 UI 设置菜单，比如：</span></span><br><span class="line">&lt;leader&gt;ud  <span class="comment"># 切换暗色/亮色模式。</span></span><br><span class="line">&lt;leader&gt;uh  <span class="comment"># 切换是否显示隐藏字符。</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="5-文件树"><a href="#5-文件树" class="headerlink" title="5. 文件树"></a>5. 文件树</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;leader&gt;e  <span class="comment"># 打开关闭文件树。</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="6-切换窗口"><a href="#6-切换窗口" class="headerlink" title="6. 切换窗口"></a>6. 切换窗口</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+(hjkl)  <span class="comment"># 进行上下左右窗口的切换</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义快捷键"><a href="#自定义快捷键" class="headerlink" title="自定义快捷键"></a>自定义快捷键</h4><p>如果觉得默认配置不舒服也可以自己修改。</p>
+<p>LazyVim 官方推荐将所有自定义的通用快捷键放在 <code>~/.config/nvim/lua/config/keymaps.lua</code> 文件中。如果这个文件不存在，手动创建一个即可。</p>
+<p>在这个文件里，你可以直接使用 Neovim 原生的 <code>vim.keymap.set</code> 函数。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- ~/.config/nvim/lua/config/keymaps.lua</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 设置 &lt;leader&gt; 键（LazyVim 默认是空格键，这里不用改）</span></span><br><span class="line"><span class="keyword">local</span> map = vim.keymap.set</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 普通模式下：按 &lt;leader&gt; + w 保存文件</span></span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;leader&gt;w&quot;</span>, <span class="string">&quot;:w&lt;CR&gt;&quot;</span>, &#123; desc = <span class="string">&quot;Save file&quot;</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 普通模式下：按 &lt;leader&gt; + q 退出</span></span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;leader&gt;q&quot;</span>, <span class="string">&quot;:q&lt;CR&gt;&quot;</span>, &#123; desc = <span class="string">&quot;Quit&quot;</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 窗口分屏大小调整（Alt + 方向键）</span></span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;A-Up&gt;&quot;</span>, <span class="string">&quot;:resize +2&lt;CR&gt;&quot;</span>, &#123; desc = <span class="string">&quot;Increase window height&quot;</span> &#125;)</span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;A-Down&gt;&quot;</span>, <span class="string">&quot;:resize -2&lt;CR&gt;&quot;</span>, &#123; desc = <span class="string">&quot;Decrease window height&quot;</span> &#125;)</span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;A-Left&gt;&quot;</span>, <span class="string">&quot;:vertical resize -2&lt;CR&gt;&quot;</span>, &#123; desc = <span class="string">&quot;Decrease window width&quot;</span> &#125;)</span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;A-Right&gt;&quot;</span>, <span class="string">&quot;:vertical resize +2&lt;CR&gt;&quot;</span>, &#123; desc = <span class="string">&quot;Increase window width&quot;</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 取消高亮搜索（LazyVim 默认是 &lt;leader&gt; + h，这里你可以改成 &lt;leader&gt; + /）</span></span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;leader&gt;/&quot;</span>, <span class="string">&quot;:noh&lt;CR&gt;&quot;</span>, &#123; desc = <span class="string">&quot;Clear search highlight&quot;</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>关键点：<code>{ desc = &quot;...&quot; }</code> 这个字段非常关键，LazyVim 的 which-key 插件会读取它，当你按下 <code>&lt;leader&gt;</code> 键等待时，就能看到你自定义的快捷键说明。</p>
+<h3 id="3-2-方案二：手动逐插件配置"><a href="#3-2-方案二：手动逐插件配置" class="headerlink" title="3.2 方案二：手动逐插件配置"></a>3.2 方案二：手动逐插件配置</h3><h4 id="插件管理器-lazy-nvim"><a href="#插件管理器-lazy-nvim" class="headerlink" title="插件管理器 lazy.nvim"></a>插件管理器 lazy.nvim</h4><p>在 <code>lua/config/lazy.lua</code> 中填入官方安装脚本：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> lazypath = vim.fn.stdpath(<span class="string">&quot;data&quot;</span>) .. <span class="string">&quot;/lazy/lazy.nvim&quot;</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> (vim.uv <span class="keyword">or</span> vim.loop).fs_stat(lazypath) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">local</span> lazyrepo = <span class="string">&quot;https://github.com/folke/lazy.nvim.git&quot;</span></span><br><span class="line">  <span class="keyword">local</span> out = vim.fn.system(&#123; <span class="string">&quot;git&quot;</span>, <span class="string">&quot;clone&quot;</span>, <span class="string">&quot;--filter=blob:none&quot;</span>, <span class="string">&quot;--branch=stable&quot;</span>, lazyrepo, lazypath &#125;)</span><br><span class="line">  <span class="keyword">if</span> vim.v.shell_error ~= <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">    vim.api.nvim_echo(&#123;</span><br><span class="line">      &#123; <span class="string">&quot;Failed to clone lazy.nvim:\n&quot;</span>, <span class="string">&quot;ErrorMsg&quot;</span> &#125;,</span><br><span class="line">      &#123; out, <span class="string">&quot;WarningMsg&quot;</span> &#125;,</span><br><span class="line">      &#123; <span class="string">&quot;\nPress any key to exit...&quot;</span> &#125;,</span><br><span class="line">    &#125;, <span class="literal">true</span>, &#123;&#125;)</span><br><span class="line">    vim.fn.getchar()</span><br><span class="line">    <span class="built_in">os</span>.<span class="built_in">exit</span>(<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">vim.opt.rtp:prepend(lazypath)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Make sure to setup `mapleader` and `maplocalleader` before</span></span><br><span class="line"><span class="comment">-- loading lazy.nvim so that mappings are correct.</span></span><br><span class="line"><span class="comment">-- This is also a good place to setup other settings (vim.opt)</span></span><br><span class="line">vim.g.mapleader = <span class="string">&quot; &quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Setup lazy.nvim</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;lazy&quot;</span>).setup(&#123;</span><br><span class="line">  spec = &#123;</span><br><span class="line">    <span class="comment">-- import your plugins</span></span><br><span class="line">    &#123; import = <span class="string">&quot;plugins&quot;</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">-- Configure any other settings here. See the documentation for more details.</span></span><br><span class="line">  <span class="comment">-- colorscheme that will be used when installing plugins.</span></span><br><span class="line">  install = &#123; colorscheme = &#123; <span class="string">&quot;habamax&quot;</span> &#125; &#125;,</span><br><span class="line">  <span class="comment">-- automatically check for plugin updates</span></span><br><span class="line">  checker = &#123; enabled = <span class="literal">true</span> &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>配置好 lazy.nvim 后，就可以极大地简化安装插件的步骤。举个例子：</p>
+<p>假设你现在想安装一个在左侧显示文件目录的插件，名字叫 nvim-tree.lua。</p>
+<p>第一步：在 <code>lua/plugins/</code> 目录下新建一个空白文件，名字随意，比如叫 <code>filetree.lua</code>。</p>
+<p>第二步：在文件里”返回一个 table”：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- return 后面跟着的大括号 &#123;&#125; 就是 Lua 里的 table（表）</span></span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  <span class="string">&quot;nvim-tree/nvim-tree.lua&quot;</span>, <span class="comment">-- 1. 插件在 GitHub 的短路径（必填）</span></span><br><span class="line">  version = <span class="string">&quot;*&quot;</span>,             <span class="comment">-- 2. 可选：锁定最新稳定版</span></span><br><span class="line">  dependencies = &#123;</span><br><span class="line">    <span class="string">&quot;nvim-tree/nvim-web-devicons&quot;</span>, <span class="comment">-- 3. 可选：这个插件依赖的图标插件（就是你刚配好的 Nerd Fonts！）</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">config</span> = <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">    <span class="comment">-- 4. 可选：这里写该插件自身的初始化设置</span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">&quot;nvim-tree&quot;</span>).setup(&#123;&#125;)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="LSP-补全全家桶"><a href="#LSP-补全全家桶" class="headerlink" title="LSP + 补全全家桶"></a>LSP + 补全全家桶</h4><ul>
+<li><strong>mason.nvim</strong>：负责下载各种语言的后端工具（比如 Python 的 pyright）。每次在 plugins 目录下创建新的 <code>xxx.lua</code> 后，打开 nvim 就会跳进 mason 管理的安装界面。可以在 nvim 下输入 <code>:Mason</code> 进入这个管理工具。</li>
+<li><strong>nvim-lspconfig</strong>：负责连接 Neovim 和你下载的工具，提供代码报错、跳转定义等功能。</li>
+<li><strong>blink.cmp</strong>：负责前端展示，把你敲代码时弹出的那个”补全小下拉框”以极快的速度画出来。</li>
+</ul>
+<p>在 <code>lua/plugins/</code> 目录下新建 <code>completion.lua</code>：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  <span class="string">&#x27;saghen/blink.cmp&#x27;</span>,</span><br><span class="line">  <span class="comment">-- 自动下载最新的预编译二进制文件（因为它有 Rust 核心，需要编译）</span></span><br><span class="line">  version = <span class="string">&#x27;*&#x27;</span>,</span><br><span class="line"></span><br><span class="line">  opts = &#123;</span><br><span class="line">    <span class="comment">-- 默认的快捷键风格（&#x27;default&#x27; 风格很像 VS Code，Tab 键选补全）</span></span><br><span class="line">    keymap = &#123; preset = <span class="string">&#x27;default&#x27;</span> &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 开启实验性的幽灵文本提示（就是在你光标后面灰色半透明显示的预测文本）</span></span><br><span class="line">    appearance = &#123;</span><br><span class="line">      use_nvim_cmp_as_default = <span class="literal">false</span>,</span><br><span class="line">      nerd_font_variant = <span class="string">&#x27;mono&#x27;</span> <span class="comment">-- 刚好用上你刚配好的 Nerd Fonts！</span></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 告诉 blink 我们的补全来源有 LSP</span></span><br><span class="line">    sources = &#123;</span><br><span class="line">      default = &#123; <span class="string">&#x27;lsp&#x27;</span>, <span class="string">&#x27;path&#x27;</span>, <span class="string">&#x27;snippets&#x27;</span>, <span class="string">&#x27;buffer&#x27;</span> &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">-- 这里可以设置补全框的微调，默认这样就足够好用了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>lua/plugins/</code> 目录下新建 <code>lsp.lua</code>：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  <span class="string">&quot;neovim/nvim-lspconfig&quot;</span>,</span><br><span class="line">  dependencies = &#123;</span><br><span class="line">    <span class="string">&quot;williamboman/mason.nvim&quot;</span>,</span><br><span class="line">    <span class="string">&quot;williamboman/mason-lspconfig.nvim&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">config</span> = <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">    <span class="comment">-- 1. 初始化 Mason</span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">&quot;mason&quot;</span>).setup()</span><br><span class="line">    <span class="built_in">require</span>(<span class="string">&quot;mason-lspconfig&quot;</span>).setup(&#123;</span><br><span class="line">      ensure_installed = &#123; <span class="string">&quot;pyright&quot;</span>, <span class="string">&quot;gopls&quot;</span> &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 2. 让 blink.cmp 自动生成 LSP 的补全能力能力给 lspconfig</span></span><br><span class="line">    <span class="keyword">local</span> capabilities = <span class="built_in">require</span>(<span class="string">&#x27;blink.cmp&#x27;</span>).get_lsp_capabilities()</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 3. 【核心修正】顺应新版 Neovim 规范</span></span><br><span class="line">    <span class="comment">-- 判断新版内置的 vim.lsp.config 是否存在，如果存在就用新版，否则回退到老版</span></span><br><span class="line">    <span class="keyword">local</span> lsp_setup = <span class="function"><span class="keyword">function</span><span class="params">(server_name, config)</span></span></span><br><span class="line">      <span class="built_in">config</span> = <span class="built_in">config</span> <span class="keyword">or</span> &#123;&#125;</span><br><span class="line">      <span class="built_in">config</span>.capabilities = vim.tbl_deep_extend(<span class="string">&#x27;force&#x27;</span>, capabilities, <span class="built_in">config</span>.capabilities <span class="keyword">or</span> &#123;&#125;)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> vim.lsp.<span class="built_in">config</span> <span class="keyword">then</span></span><br><span class="line">        <span class="comment">-- 2026 新版写法: 使用内置的 vim.lsp.config</span></span><br><span class="line">        vim.lsp.<span class="built_in">config</span>(server_name, <span class="built_in">config</span>)</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        <span class="comment">-- 旧版兼容写法</span></span><br><span class="line">        <span class="built_in">require</span>(<span class="string">&#x27;lspconfig&#x27;</span>)[server_name].setup(<span class="built_in">config</span>)</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 4. 为你需要的语言启动服务（直接调用我们封装好的新适配函数）</span></span><br><span class="line">    lsp_setup(<span class="string">&quot;pyright&quot;</span>)</span><br><span class="line">    lsp_setup(<span class="string">&quot;gopls&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 5. 配置一个快捷键：当 LSP 准备好时，按 &#x27;gd&#x27; 可以跳转到定义</span></span><br><span class="line">    vim.api.nvim_create_autocmd(<span class="string">&#x27;LspAttach&#x27;</span>, &#123;</span><br><span class="line">      callback = <span class="function"><span class="keyword">function</span><span class="params">(args)</span></span></span><br><span class="line">        <span class="keyword">local</span> opts = &#123; buffer = args.buf &#125;</span><br><span class="line">        vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;gd&#x27;</span>, vim.lsp.buf.definition, opts) <span class="comment">-- gd: 跳转定义</span></span><br><span class="line">        vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;K&#x27;</span>, vim.lsp.buf.hover, opts)       <span class="comment">-- K: 显示悬浮提示</span></span><br><span class="line">      <span class="keyword">end</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="keyword">end</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="语法高亮-Treesitter"><a href="#语法高亮-Treesitter" class="headerlink" title="语法高亮 (Treesitter)"></a>语法高亮 (Treesitter)</h4><p>在 <code>lua/plugins/</code> 目录下新建 <code>treesitter.lua</code>：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  <span class="string">&quot;nvim-treesitter/nvim-treesitter&quot;</span>,</span><br><span class="line">  build = <span class="string">&quot;:TSUpdate&quot;</span>,</span><br><span class="line">  <span class="comment">-- 新版 nvim-treesitter 推荐直接在 opts 里写配置，它会自动帮你初始化</span></span><br><span class="line">  opts = &#123;</span><br><span class="line">    <span class="comment">-- 自动确保安装以下语言的解析器</span></span><br><span class="line">    ensure_installed = &#123; <span class="string">&quot;python&quot;</span>, <span class="string">&quot;go&quot;</span>, <span class="string">&quot;cpp&quot;</span>, <span class="string">&quot;lua&quot;</span>, <span class="string">&quot;vim&quot;</span>, <span class="string">&quot;vimdoc&quot;</span> &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 启用极其精准的语法高亮</span></span><br><span class="line">    highlight = &#123;</span><br><span class="line">      enable = <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 增量选择</span></span><br><span class="line">    incremental_selection = &#123;</span><br><span class="line">      enable = <span class="literal">true</span>,</span><br><span class="line">      keymaps = &#123;</span><br><span class="line">        init_selection = <span class="string">&quot;&lt;CR&gt;&quot;</span>,    <span class="comment">-- 按回车开启选择</span></span><br><span class="line">        node_incremental = <span class="string">&quot;&lt;CR&gt;&quot;</span>,  <span class="comment">-- 再次按回车：扩大选中范围</span></span><br><span class="line">        scope_incremental = <span class="string">&quot;&lt;false&gt;&quot;</span>,</span><br><span class="line">        node_decremental = <span class="string">&quot;&lt;BS&gt;&quot;</span>,  <span class="comment">-- 按退格键：缩小选中范围</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">-- 告诉 lazy.nvim 使用新版标准的 config 行为</span></span><br><span class="line">  <span class="built_in">config</span> = <span class="function"><span class="keyword">function</span><span class="params">(_, opts)</span></span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">&quot;nvim-treesitter&quot;</span>).setup(opts)</span><br><span class="line">  <span class="keyword">end</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="多功能包-Snacks"><a href="#多功能包-Snacks" class="headerlink" title="多功能包 (Snacks)"></a>多功能包 (Snacks)</h4><p>Snacks 是 folke 开发的多功能整合包，把多个高频功能统一收纳进一个包中。</p>
+<p>在 <code>lua/plugins/</code> 目录下新建 <code>snacks.lua</code>：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  <span class="string">&quot;folke/snacks.nvim&quot;</span>,</span><br><span class="line">  priority = <span class="number">1000</span>, <span class="comment">-- 优先级拉满，让它在最开头的阶段就加载</span></span><br><span class="line">  lazy = <span class="literal">false</span>,    <span class="comment">-- 不延迟加载，因为它负责主页和通知</span></span><br><span class="line">  opts = &#123;</span><br><span class="line">    <span class="comment">-- 开启你想要的功能组件，不需要的填 false 或者不写</span></span><br><span class="line">    dashboard = &#123; enabled = <span class="literal">true</span> &#125;, <span class="comment">-- 炫酷的主页</span></span><br><span class="line">    notifier  = &#123; enabled = <span class="literal">true</span> &#125;, <span class="comment">-- 现代化的右上角通知</span></span><br><span class="line">    gitblame  = &#123; enabled = <span class="literal">true</span> &#125;, <span class="comment">-- 在光标行后面显示 Git 提交人和时间</span></span><br><span class="line">    bigfile   = &#123; enabled = <span class="literal">true</span> &#125;, <span class="comment">-- 打开超大文件时自动优化性能防止卡死</span></span><br><span class="line">    quickfile = &#123; enabled = <span class="literal">true</span> &#125;, <span class="comment">-- 极速预加载文件</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">-- 配置快捷键：利用 snacks 瞬间找文件</span></span><br><span class="line">  keys = &#123;</span><br><span class="line">    <span class="comment">-- 1. 模糊搜索项目里的【文件名】（类似 VS Code 的 Ctrl+P）</span></span><br><span class="line">    <span class="comment">-- 快捷键：空格 + f (Find File)</span></span><br><span class="line">    &#123; <span class="string">&quot;&lt;leader&gt;f&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> Snacks.picker.files() <span class="keyword">end</span>, desc = <span class="string">&quot;Find Files&quot;</span> &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 2. 全局搜索项目里的【全局代码文字】（类似 VS Code 的 全局搜索）</span></span><br><span class="line">    <span class="comment">-- 快捷键：空格 + g (Grep Word)</span></span><br><span class="line">    &#123; <span class="string">&quot;&lt;leader&gt;g&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> Snacks.picker.grep() <span class="keyword">end</span>, desc = <span class="string">&quot;Grep Text&quot;</span> &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 3. 查看最近打开过的文件历史</span></span><br><span class="line">    <span class="comment">-- 快捷键：空格 + fr (Recent Files)</span></span><br><span class="line">    &#123; <span class="string">&quot;&lt;leader&gt;fr&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span> Snacks.picker.recent() <span class="keyword">end</span>, desc = <span class="string">&quot;Recent Files&quot;</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件树-Neo-tree"><a href="#文件树-Neo-tree" class="headerlink" title="文件树 (Neo-tree)"></a>文件树 (Neo-tree)</h4><p>neo-tree.nvim 可以在左侧直观地看到整个项目的结构，类似于 VS Code 左侧的资源管理器。</p>
+<p>创建 <code>lua/plugins/neotree.lua</code>：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  <span class="string">&quot;nvim-neo-tree/neo-tree.nvim&quot;</span>,</span><br><span class="line">  branch = <span class="string">&quot;v3.x&quot;</span>,</span><br><span class="line">  dependencies = &#123;</span><br><span class="line">    <span class="string">&quot;nvim-lua/plenary.nvim&quot;</span>,</span><br><span class="line">    <span class="string">&quot;nvim-tree/nvim-web-devicons&quot;</span>, <span class="comment">-- 华丽的彩色图标支持</span></span><br><span class="line">    <span class="string">&quot;MunifTanjim/nui.nvim&quot;</span>,</span><br><span class="line">    <span class="comment">-- 如果你之后想在文件树里直接预览图片，可以留着它</span></span><br><span class="line">    <span class="comment">-- &#123; &quot;3rd/image.nvim&quot;, opts = &#123;&#125; &#125;,</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">-- 绑定快捷键：Ctrl + t 键一键开关文件树</span></span><br><span class="line">  keys = &#123;</span><br><span class="line">    &#123; <span class="string">&quot;&lt;C-t&gt;&quot;</span>, <span class="string">&quot;&lt;cmd&gt;Neotree toggle left&lt;cr&gt;&quot;</span>, desc = <span class="string">&quot;Toggle NeoTree&quot;</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  opts = &#123;</span><br><span class="line">    close_if_last_window = <span class="literal">true</span>, <span class="comment">-- 如果只剩文件树了，自动关闭 Neovim</span></span><br><span class="line">    popup_border_style = <span class="string">&quot;rounded&quot;</span>, <span class="comment">-- 漂亮的圆角边框</span></span><br><span class="line">    filesystem = &#123;</span><br><span class="line">      follow_current_file = &#123; enabled = <span class="literal">true</span> &#125;, <span class="comment">-- 自动定位你当前正在编辑的文件</span></span><br><span class="line">      use_libuv_file_watcher = <span class="literal">true</span>, <span class="comment">-- 硬盘文件有变动时，文件树自动刷新</span></span><br><span class="line">      filtered_items = &#123;</span><br><span class="line">        visible = <span class="literal">true</span>, <span class="comment">-- 让 .git、.config 等隐藏文件默认半透明显示，而不是直接死板地隐藏</span></span><br><span class="line">        hide_dotfiles = <span class="literal">false</span>,</span><br><span class="line">        hide_gitignored = <span class="literal">false</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    window = &#123;</span><br><span class="line">      width = <span class="number">30</span>, <span class="comment">-- 侧边栏宽度</span></span><br><span class="line">      mappings = &#123;</span><br><span class="line">        [<span class="string">&quot;&lt;space&gt;&quot;</span>] = <span class="string">&quot;none&quot;</span>, <span class="comment">-- 禁用空格键，防止和你自己的 Leader 键冲突</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、补充说明"><a href="#四、补充说明" class="headerlink" title="四、补充说明"></a>四、补充说明</h2><h3 id="4-1-AI-功能配置"><a href="#4-1-AI-功能配置" class="headerlink" title="4.1 AI 功能配置"></a>4.1 AI 功能配置</h3><p>把你的 API Key 写入系统环境变量。我们在配置里指定了 <code>api_key_name = &quot;DEEPSEEK_API_KEY&quot;</code>，为了不把密码明文写在代码里，需要把它放进 <code>.zshrc</code> 里。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把后面的 sk-xxxx 换成你自己在 DeepSeek 官方申请到的真实 API Key</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export DEEPSEEK_API_KEY=&quot;sk-xxxxxxxxxxxxxxxxxxxxxxxx&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷新 Zsh 终端配置</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-字体安装"><a href="#4-2-字体安装" class="headerlink" title="4.2 字体安装"></a>4.2 字体安装</h3><p>推荐安装 JetBrainsMono Nerd Font。这里我用的是源码编译的方式，说实话挺复杂的，如果可以找到可下载的 ttf 文件直接安装就好。这里分享一下我遇到的坑。</p>
+<p>这是字体的网址：<a target="_blank" rel="noopener" href="https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/blob/main/README.ZH-CN.md">JetBrainsMonoNerdFonts</a></p>
+<p>我这里用的是 WSL，所以是在 Win 上把 ttf 字体编译出来，再拉到 WSL 中的。如果你也是在 Win 上处理的，需要注意以下几点：</p>
+<ol>
+<li><p><strong>不要开加速器</strong></p>
+</li>
+<li><p><strong>创建虚拟环境</strong>，不要与你的环境冲突：</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv venv</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\venv\Scripts\Activate.ps1  <span class="comment">#这是在PowerShell里面激活环境的命令</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>注意 PowerShell 的版本</strong>，如果版本太低需要更新：</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">winget install Microsoft.PowerShell <span class="literal">--source</span> winget <span class="comment">#安装新版本的PowerShell</span></span><br><span class="line">pwsh <span class="comment">#运行新的PowerShell(注意这里不运行这个命令选择重启是没有用的)</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>如果 <code>winget install --id FontForge.FontForge --force</code> 命令跑不通，大概率是因为无法连接微软服务。加上 <code>--source winget</code> 后它就不会再去尝试连接那个打不开的微软商店了：</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget install <span class="literal">--id</span> FontForge.FontForge <span class="literal">--force</span> <span class="literal">--source</span> winget</span><br></pre></td></tr></table></figure>
+
+<p>另外还要注意，虽然你通过 winget 安装了 FontForge，但系统还没有把它的安装路径加到全局环境变量 (PATH) 里，导致脚本在调用 <code>fontforge</code> 命令去给字体打补丁时找不到它。还需要运行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$env:Path</span> += <span class="string">&quot;;C:\Program Files\FontForgeBuilds\bin\&quot;</span> <span class="comment">#这个位置是你fontforge.exe的位置，用winget安装的话一般会安装在这里，但是如果不对的话，你还需要自己找一找</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><strong>注意换源</strong>，如果没换源可以用这个命令指定源：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r <span class="string">&quot;./requirements.txt&quot;</span> -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li><code>.\build.ps1</code> 运行的时候大概率会问你要 GitHub PAT。可以在登录 GitHub 后，点击右上角头像 → Settings → 左侧栏最下方 Developer settings → Personal access tokens → Tokens (classic) → Generate new token (classic)，勾选 <code>repo</code> 权限，生成后复制那串以 <code>ghp_</code> 开头的长字符串，粘贴到终端里按回车。</li>
+</ol>
+<p>我们把得到的 <code>JetBrainsMonoNerdFont-Regular.ttf</code> 放在 <code>~/.local/share/fonts/JetBrainsMonoNerdFonts</code>，没有的话就创建一个：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/.local/share/fonts/JetBrainsMonoNerdFonts</span><br></pre></td></tr></table></figure>
+
+<p>然后刷新 Linux 字体缓存：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fc-cache -f -v</span><br></pre></td></tr></table></figure>
+
+<p>检验是否成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fc-list : family | grep -i <span class="string">&quot;JetBrainsMono&quot;</span></span><br></pre></td></tr></table></figure>
+<p>如果终端输出了类似 <code>JetBrainsMonoNL Nerd Font</code> 或 <code>JetBrainsMono Nerd Font</code> 的字样，说明 Linux 系统层面已经彻底搞定。</p>
+<h3 id="4-3-清理重装"><a href="#4-3-清理重装" class="headerlink" title="4.3 清理重装"></a>4.3 清理重装</h3><p>如果你觉得之前的安装和配置过程由于各种报错、网络或环境原因被搞得有点乱，想彻底推倒重来，清除所有旧的缓存和不完整的插件，可以执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 强行删除 lazy.nvim 存放插件的目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf ~/.local/share/nvim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 强行删除 Neovim 的状态和缓存残留</span></span><br><span class="line"><span class="built_in">rm</span> -rf ~/.local/state/nvim</span><br><span class="line"><span class="built_in">rm</span> -rf ~/.cache/nvim</span><br></pre></td></tr></table></figure>
+
+<p>放心删，这三个目录只存放自动下载的插件和临时日志，完全不会动到你写在 <code>~/.config/nvim</code> 里的任何一行配置代码。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1994127486221575639">知乎文章</a></li>
+</ul>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>YuHan<br>
+        <strong>本文链接：</strong><a href="https://cocla009.github.io/yh.github.io/2026/06/27/ubuntu22-04%E9%85%8D%E7%BD%AE-Neovim/" title="https:&#x2F;&#x2F;cocla009.github.io&#x2F;yh.github.io&#x2F;2026&#x2F;06&#x2F;27&#x2F;ubuntu22-04配置-Neovim&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;cocla009.github.io&#x2F;yh.github.io&#x2F;2026&#x2F;06&#x2F;27&#x2F;ubuntu22-04配置-Neovim&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/yh.github.io/tags/LSP/" rel="tag">LSP</a> <a class="kirafont icon-tag-fill -none-link" href="/yh.github.io/tags/LazyVim/" rel="tag">LazyVim</a> <a class="kirafont icon-tag-fill -none-link" href="/yh.github.io/tags/Neovim/" rel="tag">Neovim</a> <a class="kirafont icon-tag-fill -none-link" href="/yh.github.io/tags/Ubuntu/" rel="tag">Ubuntu</a> <a class="kirafont icon-tag-fill -none-link" href="/yh.github.io/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<!-- 文章目录 (仅文章页显示) -->
+	
+
+	<!-- 最近文章 -->
+	<div class="kira-right-widget">
+		<h4>最近文章</h4>
+		<ul>
+			
+			
+			<li><a href="/yh.github.io/2026/06/27/ubuntu22-04%E9%85%8D%E7%BD%AE-Neovim/">ubuntu22.04配置 Neovim</a></li>
+			
+			<li><a href="/yh.github.io/2026/06/26/hello-world/">Hello World</a></li>
+			
+		</ul>
+	</div>
+
+	<!-- 返回顶部 -->
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+		
+<script src="/yh.github.io/js/kira-poetize.js"></script>
+
+		
+<script src="/yh.github.io/js/kira-enhance.js"></script>
+
+	</body>
+</html>
